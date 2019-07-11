@@ -1,0 +1,55 @@
+import java.util.*;
+class RSA
+{
+public static void main(String args[])
+{
+Scanner sc=new Scanner(System.in);
+System.out.println("Enter 2 Prime nos");
+int p=sc.nextInt();
+int q=sc.nextInt();
+int n=p*q;
+int fi=(p-1)*(q-1);
+System.out.println("Enter the value for e");
+int e=sc.nextInt();
+while(true)
+{
+if(GCD(fi,e)!=1)
+{
+System.out.println("Enter a valid value for e");
+e=sc.nextInt();
+}
+else
+break;
+}
+int d= D(e,fi);
+System.out.println(d);
+System.out.println("Enter plain text(number):");
+int m=sc.nextInt();
+int c= (int)((Math.pow(m,e))%n);
+
+int m1= (int)((Math.pow(c,d))%n);
+System.out.println("Cipher text is: "+c);
+System.out.println("decrypted :"+m);
+
+//System.out.println("decrypted :"+m);
+}
+
+static int D(int e, int fi)
+{
+int x;
+for(int i=1;i<=fi;i++)
+{
+x=(i*e)%fi;
+if(x==1)
+return i;
+}
+return 0;
+}
+
+static int GCD(int num1, int num2) {
+
+if(num2 == 0){
+return num1;
+}
+return GCD(num2, num1%num2);
+}
